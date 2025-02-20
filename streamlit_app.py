@@ -30,7 +30,7 @@ def extract_pcap_info(pcap_file):
             tcp = packet.getlayer("TCP")
             payload = bytes(tcp.payload)
             payload_text = payload.decode("utf-8", errors="ignore")
-            #if re.search(r"(GET|POST|HTTP/1\.[01])", payload_text):
+            #if re.search(r"(^GET |^POST |^PUT )", payload_text):
             if re.search(r"(GET|POST)", payload_text):
                 print(f"Packet {i + 1}:")
                 header = payload_text.split("\n")[0]
