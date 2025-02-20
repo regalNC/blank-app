@@ -61,7 +61,7 @@ def extract_pcap_info(pcap_file):
 
 st.header("Malware expander")
 
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.file_uploader("Select a PCAP file")
 if uploaded_file is not None:
     # To read file as bytes:
 
