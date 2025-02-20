@@ -40,7 +40,7 @@ def extract_pcap_info(pcap_file):
             if re.search(r"(^GET\s|^POST\s|^PUT\s)", payload_text):
                 print(f"Packet {i + 1}:")
                 header = payload_text.split("\n")[0]
-                print(header)
+                #print(header)
                 pkt_nums.append(i+1)
                 ips_src.append(ipsrc)
                 ips_dst.append(ipdst)
