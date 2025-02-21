@@ -2,7 +2,7 @@
 
 Allow to inpect malware file over HTTP a from PCAP file.
 
-[![Open in Streamlit]]([https://blank-app-template.streamlit.app/](https://malwareinfo-extrator.streamlit.app))
+[![Open in Streamlit]](https://malwareinfo-extrator.streamlit.app))
 
 ### How to run it on your own machine
 
