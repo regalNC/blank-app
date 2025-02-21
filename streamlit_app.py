@@ -2,8 +2,12 @@ from scapy.all import rdpcap
 import pandas as pd
 import re
 import streamlit as st
+#from streamlit_autorefresh import st_autorefresh
 
-st.write("Start")
+
+
+#st_autorefresh(interval=1 * 1000, key="dataframerefresh")
+
 def extract_pcap_info(pcap_file):
     # Read packets from the PCAP file
 
@@ -17,9 +21,14 @@ def extract_pcap_info(pcap_file):
     packets = rdpcap(pcap_file)
 
     # Iterate through packets and extract relevant information
+    st.write(f"Total number of frames in PCAP: {len(packets)}")
 
+    incr_val = 0
     for i, packet in enumerate(packets):
-        #pbar.progress(i + 1, text="Operation in progress")
+        # if i%incr == 0:
+        #     incr_val += 1
+        #     if incr_val <= 100:
+        #         pbar.progress(incr_val, text="Operation in progress")
 
         # IP layer
         if packet.haslayer("IP"):
@@ -36,7 +45,7 @@ def extract_pcap_info(pcap_file):
             if re.search(r"(^GET\s|^POST\s|^PUT\s)", payload_text):
                 print(f"Packet {i + 1}:")
                 header = payload_text.split("\n")[0]
-                #print(header)
+                print(header[0:200])
                 pkt_nums.append(i+1)
                 ips_src.append(ipsrc)
                 ips_dst.append(ipdst)
@@ -61,15 +70,21 @@ def extract_pcap_info(pcap_file):
     df = pd.DataFrame(data)
     return(df)
 
-st.header("Malware expander")
+st.header("Malware Viewer")
 
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file = st.file_uploader("Choose a PCAP file with malware sent over HTTP")
 
 if uploaded_file is not None:
-    # To read file as bytes
-    
+    # To read file as bytes:
+
+    #progress_text = "Operation in progress. Please wait."
+    #pb = st.empty()
+    #pb.progress(0, text="Operation in progress")
+    #pbar = st.progress(10, text="Operation in progress")
+
     # Can be used wherever a "file-like" object is accepted:
-    df = extract_pcap_info(uploaded_file)
+    with st.spinner("Please wait..."):
+        df = extract_pcap_info(uploaded_file)
 
     #dataframe = pd.read_csv(uploaded_file)
     st.write(df)
