@@ -2,11 +2,6 @@ from scapy.all import rdpcap
 import pandas as pd
 import re
 import streamlit as st
-#from streamlit_autorefresh import st_autorefresh
-
-
-
-#st_autorefresh(interval=1 * 1000, key="dataframerefresh")
 
 def extract_pcap_info(pcap_file):
     # Read packets from the PCAP file
