@@ -66,12 +66,8 @@ st.header("Malware expander")
 uploaded_file = st.file_uploader("Choose a file")
 
 if uploaded_file is not None:
-    # To read file as bytes:
-
-    progress_text = "Operation in progress. Please wait."
-    #pbar = st.progress(0, text="Operation in progress")
-    #pbar = st.progress(10, text="Operation in progress")
-
+    # To read file as bytes
+    
     # Can be used wherever a "file-like" object is accepted:
     df = extract_pcap_info(uploaded_file)
 
